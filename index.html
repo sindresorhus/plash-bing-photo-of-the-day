@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Bing Photo of the Day for Plash</title>
+		<style>
+			html,
+			body {
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				background-color: #000;
+			}
+
+			#photo {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="photo"></div>
+		<script type="module">
+			// More info about the API:
+			// https://stackoverflow.com/questions/10639914/is-there-a-way-to-get-bings-photo-of-the-day
+
+			async function fetchPhoto() {
+				// For local dev
+				// const imageUrl = 'http://www.bing.com/th?id=OHR.NewYearFuji_ROW7249160512_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp';
+
+				const baseUrl = 'http://www.bing.com';
+				const response = await fetch('/api');
+				const json = await response.json();
+				const imageUrl = baseUrl + json.images[0].url;
+				document.querySelector('#photo').style.backgroundImage = `url(${imageUrl})`;
+			}
+
+			// We refetch every 6 hours as we don't know exactly when Bing changes the photo.
+			const SIX_HOURS = 1000 * 60 * 60 * 6;
+
+			setInterval(fetchPhoto, SIX_HOURS);
+
+			fetchPhoto();
+		</script>
+	</body>
+</html>
