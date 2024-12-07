@@ -5,7 +5,7 @@
 ## Usage
 
 - Select “Add Website…” in the Plash menu.
-- Paste in `https://bing-photo-of-the-day.netlify.com` and click “Add”.
+- Paste in `https://bing-photo-of-the-day.netlify.app` and click “Add”.
 - 👌🦄
 
 You don't need to set the “Interval” preference in Plash as the website will refresh the image automatically every 6 hours.
